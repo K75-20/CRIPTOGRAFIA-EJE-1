@@ -1,0 +1,50 @@
+def escitala_cifrar(mensaje, columnas):
+    filas = len(mensaje) // columnas + (len(mensaje) % columnas > 0)
+    cifrado = ""
+    for i in range(columnas):
+        for j in range(filas):
+            indice = j * columnas + i
+            if indice < len(mensaje):
+                cifrado += mensaje[indice]
+    return cifrado
+
+def escitala_descifrar(mensaje_cifrado, columnas):
+    filas = (len(mensaje_cifrado) + columnas - 1) // columnas
+    descifrado = ""
+    for i in range(filas):
+        for j in range(columnas):
+            indice = j * filas + i
+            if indice < len(mensaje_cifrado):
+                descifrado += mensaje_cifrado[indice]
+    return descifrado
+
+while True:
+    print("\n=== Escítala ===")
+    print("1. Cifrar mensaje")
+    print("2. Descifrar mensaje")
+    print("3. Salir")
+
+    opcion = input("Elige una opción: ")
+
+    if opcion == "1":
+        mensaje = input("Escribe el mensaje a cifrar: ")
+        columnas = int(input("Escribe el tamaño de la vara (número de columnas): "))
+        # Normalización del texto
+        mensaje = mensaje.replace(" ", "").upper()
+        mensaje_cifrado = escitala_cifrar(mensaje, columnas)
+        print("\nMensaje cifrado:", mensaje_cifrado)
+
+    elif opcion == "2":
+        mensaje_cifrado = input("Escribe el mensaje a descifrar: ")
+        columnas = int(input("Escribe el tamaño de la vara (número de columnas): "))
+        # Normalización del texto cifrado
+        mensaje_cifrado = mensaje_cifrado.replace(" ", "").upper()
+        mensaje_descifrado = escitala_descifrar(mensaje_cifrado, columnas)
+        print("\nMensaje descifrado:", mensaje_descifrado)
+
+    elif opcion == "3":
+        print("Saliendo del programa...Adios!")
+        break
+
+    else:
+        print("Opción no válida. Intenta de nuevo.")
